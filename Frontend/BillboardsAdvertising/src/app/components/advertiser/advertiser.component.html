@@ -1,0 +1,33 @@
+<div class="container">
+  <h1>Advertiser panel</h1>
+  <div class="alert alert-success">
+    <h5>username: <strong>{{name}}</strong></h5>
+  </div>
+
+  <div>
+    <h4>Add </h4>
+    <div class="form-group">
+      <label for="device">File location:</label>
+
+          <button class="btn btn-outline-info btn-sm">
+            ...
+          </button>
+
+    </div>
+
+    <form (submit)="addDevice(device.value)">
+      <div class="form-group">
+        <label for="device">Enter cost:</label>
+
+            <div class="text-up" style="max-width: 300px;">
+              <input type="text" id="device" placeholder="$"
+              class="form-control" #device>
+            </div>
+
+            <button type="submit" class="btn btn-outline-success">
+            Add
+            </button>
+        </div>
+    </form>
+  </div>
+</div>

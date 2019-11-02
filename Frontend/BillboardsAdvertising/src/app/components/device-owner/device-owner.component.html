@@ -1,0 +1,127 @@
+<div class="container">
+  <h1>Device owner panel</h1>
+  <div class="alert alert-success">
+    <h5>username: <strong>{{name}}</strong></h5>
+  </div>
+
+
+<div class="chain">
+
+  <div class="block">
+    <div class="">
+      <form (submit)="addDevice(device.value)">
+        <div class="form-group">
+          <label for="device">Add new device</label>
+
+          <div class="text-up">
+            <input type="text" id="device" placeholder="Device group"
+            class="form-control" #device>
+          </div>
+
+          <div class="chain">
+
+            <div class="block">
+              <div class="text-up">
+                <input type="text" id="device" placeholder="Device name"
+                class="form-control" #device>
+              </div>
+            </div>
+
+            <div class="block">
+              <button type="submit" class="btn btn-outline-success">
+              Add
+              </button>
+            </div>
+
+          </div>
+        </div>
+      </form>
+    </div>
+    <div class="">
+
+    </div>
+    <div>
+      <h5>List of devices [5]</h5>
+      <ul>
+          <li *ngFor="let device of devices; let i = index">
+            <div class="alert alert-info">
+
+                <div class="block">
+                  {{i+1}}) <strong>{{device}}</strong>
+                </div>
+                <div class="block">
+                  group: <strong>default</strong>
+                </div>
+
+                <div class="">
+                    <button class="btn btn-success" >
+                      View statistics
+                    </button>
+                    <button class="btn btn-info" (click)="viewScreen(device)">
+                      View screen
+                    </button>
+                    <button class="btn btn-danger" (click)="deleteDevice(device)">
+                      Delete
+                    </button>
+                </div>
+            </div>
+          </li>
+      </ul>
+    </div>
+
+    <div>
+      <h5>List of scedules</h5>
+      <button type="submit" class="btn btn-outline-success">
+      Add scedule
+      </button>
+      <ul>
+          <li *ngFor="let device of devices; let i = index">
+          </li>
+      </ul>
+    </div>
+
+    <div>
+      <h5>List of content</h5>
+      <button type="submit" class="btn btn-outline-success">
+      Add content
+      </button>
+      <ul>
+          <li *ngFor="let device of devices; let i = index">
+          </li>
+      </ul>
+    </div>
+
+  </div>
+
+  <div class="block">
+    <form *ngIf=isView>
+
+          <div class="alert alert-warning">
+            <div>
+              <h5>Monitor: <strong>{{devices[1]}}</strong></h5>
+              <div class="blockForImg">
+                <img src="https://sun1-14.userapi.com/c543109/v543109376/434d2/nH4UCPMVDk8.jpg">
+              </div>
+            </div>
+
+            <div class="chain">
+              <div class="block">
+                <button type="submit" class="btn btn-outline-success">
+                Add content
+                </button>
+              </div>
+
+              <div class="block">
+                <button type="submit" class="btn btn-outline-success">
+                Add timetable
+                </button>
+              </div>
+            </div>
+          </div>
+    </form>
+
+  </div>
+
+
+
+</div>
