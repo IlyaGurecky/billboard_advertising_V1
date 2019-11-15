@@ -6,7 +6,7 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 
-import java.util.List;
+import java.time.Instant;
 
 @Data
 @Builder
@@ -14,10 +14,8 @@ import java.util.List;
 @javax.persistence.Entity
 @NoArgsConstructor
 @AllArgsConstructor
-public class Advertising extends Entity {
-    private String name;
-    private String contentPath;
-    private User user;
-    private int cost;
-    private List<AdvertisingStatistic> statistics;
+public class AdvertisingStatistic extends Entity {
+    private Instant time;
+    private Advertising advertising;
+    private String content;
 }

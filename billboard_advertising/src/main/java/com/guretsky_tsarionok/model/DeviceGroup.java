@@ -6,6 +6,8 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 
+import java.util.List;
+
 @Data
 @Builder
 @EqualsAndHashCode(callSuper = true)
@@ -14,5 +16,5 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class DeviceGroup extends Entity {
     private String name;
-    private Schedule schedule;
+    private List<Device> devices;
 }
