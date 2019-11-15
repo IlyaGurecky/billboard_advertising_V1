@@ -18,5 +18,7 @@ public class Schedule extends Entity {
     private String name;
     private long time;
     private List<Advertising> advertisingList;
+    private User user;
     private Device device;
+    private DeviceGroup group;
 }

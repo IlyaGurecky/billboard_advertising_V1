@@ -17,5 +17,7 @@ import java.util.List;
 public class User extends Entity {
     private String userName;
     private Role role;
+    private List<Device> devices;
     private List<Advertising> advertisingList;
+    private List<Schedule> schedules;
 }

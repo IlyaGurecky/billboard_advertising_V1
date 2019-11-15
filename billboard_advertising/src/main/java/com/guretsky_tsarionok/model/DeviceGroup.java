@@ -14,4 +14,5 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class DeviceGroup extends Entity {
     private String name;
+    private Schedule schedule;
 }
