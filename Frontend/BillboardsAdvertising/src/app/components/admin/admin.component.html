@@ -1,0 +1,142 @@
+<div class="container">
+  <h1>Admin panel</h1>
+  <div class="alert alert-success">
+    <h5>username: <strong>{{name}}</strong></h5>
+  </div>
+
+
+<div class="chain">
+
+  <div class="block">
+    <div class="">
+      <form (submit)="addUser(owner.value)">
+        <div class="form-group">
+          <label for="owner">Add new device owner</label>
+          <div class="chain">
+            <div class="block">
+              <div class="text-up">
+                <input type="text" id="owner" placeholder="Enter username"
+                class="form-control" #owner>
+              </div>
+            </div>
+            <div class="block">
+              <button type="submit" class="btn btn-outline-success">
+              Add
+              </button>
+            </div>
+          </div>
+        </div>
+      </form>
+    </div>
+
+    <h5>List of device owners[5]</h5>
+    <h6>Devices amount: 134</h6>
+
+    <ul>
+
+        <li *ngFor="let user of users; let i = index">
+          <div class="alert alert-info">
+
+              <div class="">
+                {{i+1}}) <strong>{{user}}</strong>
+              </div>
+              <div class="">
+                  <button class="btn btn-info" (click)="viewDevices()">
+                    View devices
+                  </button>
+                  <button class="btn btn-danger" (click)="deleteUser(user)">
+                    Delete
+                  </button>
+              </div>
+
+
+                <form *ngIf=isView>
+                  <div>
+                    <div>
+                      <label for="owner">Add new device</label>
+                      <input type="text" id="owner" placeholder="Enter device name"
+                      class="form-control" #owner>
+                    </div>
+
+                  <br>
+                  <h6>List of devices</h6>
+                    <div class="alert alert-success">
+                      <ul>
+                        <div>
+
+                          <li *ngFor="let device of devices; let i = index">
+                            <div>
+                              <div class="block">
+                                  {{i+1}}) <strong>{{device}}</strong>
+                              </div>
+                            </div>
+                            <div>
+                              <button class="btn btn-danger btn-sm" (click)="deleteUser(user)">
+                                x
+                              </button>
+
+                              <button class="btn btn-info btn-sm" (click)="viewMonitor()">
+                                ...
+                              </button>
+
+                            </div>
+                          </li>
+
+                        </div>
+                      </ul>
+                    </div>
+                  </div>
+                </form>
+            </div>
+
+        </li>
+    </ul>
+  </div>
+
+  <div class="block">
+    <div>
+      <h5>Devices monitor:</h5>
+      <div class="alert alert-warning">
+        <div>
+          <h5>Monitoring: <strong>{{devices[2]}}</strong></h5>
+          <div class="Monitoring block">
+            
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <div>
+      <h5>User action logs</h5>
+      <div class="alert alert-danger">
+        <ul>
+          <li *ngFor="let user of users; let i = index; let device of devices">
+              <h6>User <strong>{{user}}</strong> connected to {{device}}</h6>
+          </li>
+        </ul>
+      </div>
+          <div class="form-group">
+            <div class="">
+              <label for="owner">Export logs by username</label>
+            </div>
+
+            <div class="block">
+              <div class="text-up">
+                <input type="text" id="export" placeholder="Username"
+                class="form-control" #export>
+              </div>
+            </div>
+
+            <div class="block">
+              <button class="btn btn-success" (click)="viewDevices()">
+                Export
+              </button>
+            </div>
+          </div>
+    </div>
+
+
+  </div>
+
+</div>

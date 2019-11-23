@@ -1,0 +1,29 @@
+body{
+  background-color: #e9f2f5;
+}
+button {
+  margin-right: 10px;
+  margin-left: 20px;
+  margin-top: 5px;
+  margin-bottom: 5px;
+}
+
+.chain {
+  max-width: 100%;
+  height: auto;
+  overflow:hidden;
+}
+
+.block {
+  width: 45%;
+  float: left;
+  margin-left: 20px;
+}
+
+.text-up {
+  margin-top: 5px;
+}
+
+.blockForImg{
+overflow:hidden;
+}
