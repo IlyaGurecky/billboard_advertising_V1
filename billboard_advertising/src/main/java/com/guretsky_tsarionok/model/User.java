@@ -1,10 +1,12 @@
 package com.guretsky_tsarionok.model;
 
+import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
+import lombok.experimental.FieldDefaults;
 
 import java.util.List;
 
@@ -14,10 +16,11 @@ import java.util.List;
 @javax.persistence.Entity
 @NoArgsConstructor
 @AllArgsConstructor
+@FieldDefaults(level = AccessLevel.PRIVATE)
 public class User extends Entity {
-    private String userName;
-    private Role role;
-    private List<Device> devices;
-    private List<Advertising> advertisingList;
-    private List<Schedule> schedules;
+    String userName;
+    Role role;
+    List<Device> devices;
+    List<Advertising> advertisingList;
+    List<Schedule> schedules;
 }

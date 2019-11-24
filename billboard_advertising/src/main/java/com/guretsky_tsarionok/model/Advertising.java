@@ -1,10 +1,12 @@
 package com.guretsky_tsarionok.model;
 
+import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
+import lombok.experimental.FieldDefaults;
 
 import java.util.List;
 
@@ -14,10 +16,11 @@ import java.util.List;
 @javax.persistence.Entity
 @NoArgsConstructor
 @AllArgsConstructor
+@FieldDefaults(level = AccessLevel.PRIVATE)
 public class Advertising extends Entity {
-    private String name;
-    private String contentPath;
-    private User user;
-    private int cost;
-    private List<AdvertisingStatistic> statistics;
+    String name;
+    String contentPath;
+    User user;
+    int cost;
+    List<AdvertisingStatistic> statistics;
 }
