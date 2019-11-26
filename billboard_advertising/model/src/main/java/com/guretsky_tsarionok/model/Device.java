@@ -11,11 +11,11 @@ import lombok.experimental.FieldDefaults;
 @Data
 @Builder
 @EqualsAndHashCode(callSuper = true)
-@javax.persistence.Entity
+//@Entity
 @NoArgsConstructor
 @AllArgsConstructor
 @FieldDefaults(level = AccessLevel.PRIVATE)
-public class Device extends Entity {
+public class Device extends EntityBase {
     Schedule schedule;
     DeviceGroup group;
     User user;

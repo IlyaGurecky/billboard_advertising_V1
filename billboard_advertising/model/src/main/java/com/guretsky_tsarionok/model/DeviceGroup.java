@@ -13,14 +13,11 @@ import java.util.List;
 @Data
 @Builder
 @EqualsAndHashCode(callSuper = true)
-@javax.persistence.Entity
+//@Entity
 @NoArgsConstructor
 @AllArgsConstructor
 @FieldDefaults(level = AccessLevel.PRIVATE)
-public class Advertising extends Entity {
+public class DeviceGroup extends EntityBase {
     String name;
-    String contentPath;
-    User user;
-    int cost;
-    List<AdvertisingStatistic> statistics;
+    List<Device> devices;
 }

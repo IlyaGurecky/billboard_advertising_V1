@@ -8,11 +8,10 @@ import lombok.experimental.FieldDefaults;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.MappedSuperclass;
 
-@MappedSuperclass
+//@MappedSuperclass
 @FieldDefaults(level = AccessLevel.PRIVATE)
-public abstract class Entity {
+public abstract class EntityBase {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Getter

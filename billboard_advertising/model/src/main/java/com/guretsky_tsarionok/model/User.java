@@ -13,15 +13,14 @@ import java.util.List;
 @Data
 @Builder
 @EqualsAndHashCode(callSuper = true)
-@javax.persistence.Entity
+//@Entity
 @NoArgsConstructor
 @AllArgsConstructor
 @FieldDefaults(level = AccessLevel.PRIVATE)
-public class Schedule extends Entity {
-    String name;
-    long time;
+public class User extends EntityBase {
+    String userName;
+    Role role;
+    List<Device> devices;
     List<Advertising> advertisingList;
-    User user;
-    Device device;
-    DeviceGroup group;
+    List<Schedule> schedules;
 }

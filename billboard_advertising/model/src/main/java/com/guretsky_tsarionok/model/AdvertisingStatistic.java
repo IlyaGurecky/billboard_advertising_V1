@@ -8,19 +8,17 @@ import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 import lombok.experimental.FieldDefaults;
 
-import java.util.List;
+import java.time.Instant;
 
 @Data
 @Builder
 @EqualsAndHashCode(callSuper = true)
-@javax.persistence.Entity
+//@Entity
 @NoArgsConstructor
 @AllArgsConstructor
 @FieldDefaults(level = AccessLevel.PRIVATE)
-public class User extends Entity {
-    String userName;
-    Role role;
-    List<Device> devices;
-    List<Advertising> advertisingList;
-    List<Schedule> schedules;
+public class AdvertisingStatistic extends EntityBase {
+    Instant time;
+    Advertising advertising;
+    String content;
 }
