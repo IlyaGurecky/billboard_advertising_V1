@@ -8,15 +8,33 @@ import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 import lombok.experimental.FieldDefaults;
 
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.Table;
+import javax.validation.constraints.NotBlank;
+
 @Data
 @Builder
 @EqualsAndHashCode(callSuper = true)
-//@Entity
+@Entity
 @NoArgsConstructor
 @AllArgsConstructor
 @FieldDefaults(level = AccessLevel.PRIVATE)
+@Table(name = "device")
 public class Device extends EntityBase {
+    @NotBlank String name;
+
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "schedule_id", referencedColumnName = "id")
     Schedule schedule;
-    DeviceGroup group;
+
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "device_group_id", referencedColumnName = "id")
+    DeviceGroup deviceGroup;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "user_id", referencedColumnName = "id")
     User user;
 }
