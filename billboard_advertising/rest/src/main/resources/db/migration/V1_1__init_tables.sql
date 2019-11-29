@@ -11,7 +11,7 @@ CREATE TABLE IF NOT EXISTS `log`
     `id`      INT      NOT NULL AUTO_INCREMENT,
     `time`    DATETIME NOT NULL,
     `content` VARCHAR(255),
-    `user_id` INT      NOT NULL,
+    `user_id` INT,
     FOREIGN KEY (`user_id`) REFERENCES users (`id`) ON DELETE CASCADE,
     PRIMARY KEY (`id`)
 );
@@ -54,6 +54,8 @@ CREATE TABLE IF NOT EXISTS `advertising`
     `id`           INT          NOT NULL AUTO_INCREMENT,
     `name`         VARCHAR(255) NOT NULL,
     `content_path` VARCHAR(255) NOT NULL,
+    `user_id`      INT,
+    FOREIGN KEY (`user_id`) REFERENCES users (`id`) ON DELETE CASCADE,
     PRIMARY KEY (`id`)
 );
 
