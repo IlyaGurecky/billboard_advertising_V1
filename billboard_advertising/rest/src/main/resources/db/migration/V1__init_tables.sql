@@ -1,10 +1,8 @@
-create database if not exists billboards_ad;
-
 CREATE TABLE IF NOT EXISTS `users`
 (
     `id`       INT          NOT NULL AUTO_INCREMENT,
     `username` VARCHAR(255) NOT NULL UNIQUE,
-    `role`     VARCHAR(10) check (`role` in ('ADMIN', 'DEVICE_OWNER')),
+    `role`     VARCHAR(20) check (`role` in ('ADMIN', 'DEVICE_OWNER')),
     PRIMARY KEY (`id`)
 );
 
@@ -14,6 +12,7 @@ CREATE TABLE IF NOT EXISTS `log`
     `time`    DATETIME NOT NULL,
     `content` VARCHAR(255),
     `user_id` INT      NOT NULL,
+    FOREIGN KEY (`user_id`) REFERENCES users (`id`) ON DELETE CASCADE,
     PRIMARY KEY (`id`)
 );
 
@@ -23,6 +22,7 @@ CREATE TABLE IF NOT EXISTS `device_group`
     `name`    VARCHAR(255) NOT NULL,
     `user_id` INT          NOT NULL,
     UNIQUE (`name`, `user_id`),
+    FOREIGN KEY (`user_id`) REFERENCES users (`id`) ON DELETE CASCADE,
     PRIMARY KEY (`id`)
 );
 
@@ -32,6 +32,7 @@ CREATE TABLE IF NOT EXISTS `schedule`
     `name`      VARCHAR(255) NOT NULL,
     `frequency` INT          NOT NULL,
     `user_id`   INT          NOT NULL,
+    FOREIGN KEY (`user_id`) REFERENCES users (`id`),
     PRIMARY KEY (`id`)
 );
 
@@ -42,6 +43,9 @@ CREATE TABLE IF NOT EXISTS `device`
     `device_group_id` INT,
     `user_id`         INT          NOT NULL,
     `schedule_id`     INT,
+    FOREIGN KEY (`device_group_id`) REFERENCES device_group (`id`),
+    FOREIGN KEY (`user_id`) REFERENCES users (`id`),
+    FOREIGN KEY (`schedule_id`) REFERENCES schedule (`id`),
     PRIMARY KEY (`id`)
 );
 
@@ -59,26 +63,26 @@ CREATE TABLE IF NOT EXISTS `advertising_statistic`
     `time`           DATETIME,
     `content`        VARCHAR(255),
     `advertising_id` INT NOT NULL,
+    FOREIGN KEY (`advertising_id`) REFERENCES advertising (`id`) ON DELETE CASCADE,
     PRIMARY KEY (`id`)
 );
 
-ALTER TABLE `log`
-    ADD CONSTRAINT `log_fk0` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`);
+CREATE TABLE IF NOT EXISTS `device_ad`
+(
+    `id`             INT NOT NULL AUTO_INCREMENT,
+    `device_id`      INT NOT NULL,
+    `advertising_id` INT NOT NULL,
+    FOREIGN KEY (`device_id`) REFERENCES device (`id`) ON DELETE CASCADE,
+    FOREIGN KEY (`advertising_id`) REFERENCES advertising (`id`) ON DELETE CASCADE,
+    PRIMARY KEY (`id`)
+);
 
-ALTER TABLE `device_group`
-    ADD CONSTRAINT `device_group_fk0` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`);
-
-ALTER TABLE `schedule`
-    ADD CONSTRAINT `schedule_fk0` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`);
-
-ALTER TABLE `device`
-    ADD CONSTRAINT `device_fk0` FOREIGN KEY (`device_group_id`) REFERENCES `device_group` (`id`);
-
-ALTER TABLE `device`
-    ADD CONSTRAINT `device_fk1` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`);
-
-ALTER TABLE `device`
-    ADD CONSTRAINT `device_fk2` FOREIGN KEY (`schedule_id`) REFERENCES `schedule` (`id`);
-
-ALTER TABLE `advertising_statistic`
-    ADD CONSTRAINT `advertising_statistic_fk0` FOREIGN KEY (`advertising_id`) REFERENCES `advertising` (`id`);
+CREATE TABLE IF NOT EXISTS `schedule_ad`
+(
+    `id`             INT NOT NULL AUTO_INCREMENT,
+    `schedule_id`    INT NOT NULL,
+    `advertising_id` INT NOT NULL,
+    FOREIGN KEY (`schedule_id`) REFERENCES schedule (`id`) ON DELETE CASCADE,
+    FOREIGN KEY (`advertising_id`) REFERENCES advertising (`id`) ON DELETE CASCADE,
+    PRIMARY KEY (`id`)
+);
