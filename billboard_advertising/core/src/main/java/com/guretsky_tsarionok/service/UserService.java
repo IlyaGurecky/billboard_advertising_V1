@@ -42,4 +42,8 @@ public class UserService implements IService<User> {
     public void deleteById(long id) {
         userRepository.deleteById(id);
     }
+
+    public Optional<User> findByUsername(String username) {
+        return userRepository.findByUsername(username);
+    }
 }
