@@ -5,7 +5,7 @@ import com.guretsky_tsarionok.model.EntityBase;
 import java.util.List;
 import java.util.Optional;
 
-public interface IService<T extends EntityBase> {
+public interface CrudService<T extends EntityBase> {
     List<T> getAll();
 
     Optional<T> findById(long id);
@@ -14,5 +14,5 @@ public interface IService<T extends EntityBase> {
 
     T update(T obj);
 
-    void deleteById(long id);
+    boolean deleteById(long id);
 }
