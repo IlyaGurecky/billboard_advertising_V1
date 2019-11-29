@@ -1,7 +1,7 @@
 package com.guretsky_tsarionok.controller;
 
-import com.guretsky_tsarionok.model.User;
-import com.guretsky_tsarionok.service.UserService;
+import com.guretsky_tsarionok.model.Advertising;
+import com.guretsky_tsarionok.service.AdvertisingService;
 import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
 import lombok.experimental.FieldDefaults;
@@ -18,39 +18,35 @@ import java.util.List;
 
 @RestController
 @RequiredArgsConstructor
-@RequestMapping("/api/v1/user")
+@RequestMapping("/api/v1/advertising")
 @FieldDefaults(level = AccessLevel.PRIVATE, makeFinal = true)
-public class UserController {
+public class AdvertisingController {
 
-    UserService service;
+    AdvertisingService service;
 
     @GetMapping
-    public List<User> getAll() {
+    public List<Advertising> getAll() {
         return service.getAll();
     }
 
     @GetMapping(value = "/{id}")
-    public User getById(@PathVariable long id) {
+    public Advertising getById(@PathVariable long id) {
         return service.findById(id).orElse(null);
     }
 
-    @GetMapping(value = "/{username}")
-    public User getByUsername(@PathVariable String username) {
-        return service.findByUsername(username).orElse(null);
-    }
-
     @PostMapping
-    public User add(@RequestBody User user) {
-        return service.add(user);
+    public Advertising add(@RequestBody Advertising advertising) {
+        return service.add(advertising);
     }
 
     @PatchMapping
-    public User update(@RequestBody User user) {
-        return service.update(user);
+    public Advertising update(@RequestBody Advertising advertising) {
+        return service.update(advertising);
     }
 
     @DeleteMapping(value = "/{id}")
     public boolean deleteById(@PathVariable long id) {
         return service.deleteById(id);
     }
+
 }

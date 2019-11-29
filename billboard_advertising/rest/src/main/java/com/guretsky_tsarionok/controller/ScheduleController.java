@@ -1,7 +1,7 @@
 package com.guretsky_tsarionok.controller;
 
-import com.guretsky_tsarionok.model.User;
-import com.guretsky_tsarionok.service.UserService;
+import com.guretsky_tsarionok.model.Schedule;
+import com.guretsky_tsarionok.service.ScheduleService;
 import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
 import lombok.experimental.FieldDefaults;
@@ -18,39 +18,35 @@ import java.util.List;
 
 @RestController
 @RequiredArgsConstructor
-@RequestMapping("/api/v1/user")
+@RequestMapping("/api/v1/schedule")
 @FieldDefaults(level = AccessLevel.PRIVATE, makeFinal = true)
-public class UserController {
+public class ScheduleController {
 
-    UserService service;
+    ScheduleService service;
 
     @GetMapping
-    public List<User> getAll() {
+    public List<Schedule> getAll() {
         return service.getAll();
     }
 
     @GetMapping(value = "/{id}")
-    public User getById(@PathVariable long id) {
+    public Schedule getById(@PathVariable long id) {
         return service.findById(id).orElse(null);
     }
 
-    @GetMapping(value = "/{username}")
-    public User getByUsername(@PathVariable String username) {
-        return service.findByUsername(username).orElse(null);
-    }
-
     @PostMapping
-    public User add(@RequestBody User user) {
-        return service.add(user);
+    public Schedule add(@RequestBody Schedule schedule) {
+        return service.add(schedule);
     }
 
     @PatchMapping
-    public User update(@RequestBody User user) {
-        return service.update(user);
+    public Schedule update(@RequestBody Schedule schedule) {
+        return service.update(schedule);
     }
 
     @DeleteMapping(value = "/{id}")
     public boolean deleteById(@PathVariable long id) {
         return service.deleteById(id);
     }
+
 }

@@ -1,7 +1,7 @@
 package com.guretsky_tsarionok.controller;
 
-import com.guretsky_tsarionok.model.User;
-import com.guretsky_tsarionok.service.UserService;
+import com.guretsky_tsarionok.model.DeviceGroup;
+import com.guretsky_tsarionok.service.DeviceGroupService;
 import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
 import lombok.experimental.FieldDefaults;
@@ -18,39 +18,35 @@ import java.util.List;
 
 @RestController
 @RequiredArgsConstructor
-@RequestMapping("/api/v1/user")
+@RequestMapping("/api/v1/device_group")
 @FieldDefaults(level = AccessLevel.PRIVATE, makeFinal = true)
-public class UserController {
+public class DeviceGroupController {
 
-    UserService service;
+    DeviceGroupService service;
 
     @GetMapping
-    public List<User> getAll() {
+    public List<DeviceGroup> getDeviceGroups() {
         return service.getAll();
     }
 
     @GetMapping(value = "/{id}")
-    public User getById(@PathVariable long id) {
+    public DeviceGroup getById(@PathVariable long id) {
         return service.findById(id).orElse(null);
     }
 
-    @GetMapping(value = "/{username}")
-    public User getByUsername(@PathVariable String username) {
-        return service.findByUsername(username).orElse(null);
-    }
-
     @PostMapping
-    public User add(@RequestBody User user) {
-        return service.add(user);
+    public DeviceGroup add(@RequestBody DeviceGroup deviceGroup) {
+        return service.add(deviceGroup);
     }
 
     @PatchMapping
-    public User update(@RequestBody User user) {
-        return service.update(user);
+    public DeviceGroup update(@RequestBody DeviceGroup deviceGroup) {
+        return service.update(deviceGroup);
     }
 
     @DeleteMapping(value = "/{id}")
     public boolean deleteById(@PathVariable long id) {
         return service.deleteById(id);
     }
+
 }
