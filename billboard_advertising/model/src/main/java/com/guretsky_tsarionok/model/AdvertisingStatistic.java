@@ -1,5 +1,6 @@
 package com.guretsky_tsarionok.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -35,5 +36,6 @@ public class AdvertisingStatistic extends EntityBase {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "advertising_id", referencedColumnName = "id")
+    @JsonIgnore
     Advertising advertising;
 }
