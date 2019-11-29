@@ -1,5 +1,6 @@
 package com.guretsky_tsarionok.service.impl;
 
+import com.guretsky_tsarionok.model.Role;
 import com.guretsky_tsarionok.model.User;
 import com.guretsky_tsarionok.repository.UserRepository;
 import com.guretsky_tsarionok.service.UserService;
@@ -30,6 +31,12 @@ public class UserServiceImpl implements UserService {
     @Transactional(readOnly = true)
     public Optional<User> findById(long id) {
         return userRepository.findById(id);
+    }
+
+    @Override
+    @Transactional(readOnly = true)
+    public List<User> getDeviceOwners() {
+        return userRepository.getByRole(Role.DEVICE_OWNER);
     }
 
     @Override

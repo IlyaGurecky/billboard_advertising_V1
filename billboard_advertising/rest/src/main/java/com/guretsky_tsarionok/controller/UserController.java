@@ -34,7 +34,12 @@ public class UserController {
         return service.findById(id).orElse(null);
     }
 
-    @GetMapping(value = "/{username}")
+    @GetMapping(value = "/device-owners")
+    public List<User> getAllDeviceOwners() {
+        return service.getDeviceOwners();
+    }
+
+    @GetMapping(value = "/name/{username}")
     public User getByUsername(@PathVariable String username) {
         return service.findByUsername(username).orElse(null);
     }
