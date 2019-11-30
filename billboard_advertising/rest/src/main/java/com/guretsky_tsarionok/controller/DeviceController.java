@@ -35,7 +35,7 @@ public class DeviceController {
         return service.findById(id).orElse(null);
     }
 
-    @GetMapping(value = "/schedule/{scheduleId}/group/{groupId}/user")
+    @PatchMapping(value = "/schedule/{scheduleId}/group/{groupId}/user")
     public List<Device> setScheduleForGroup(@PathVariable long scheduleId,
                                             @PathVariable long groupId) {
         return service.setScheduleForGroup(groupId, scheduleId);

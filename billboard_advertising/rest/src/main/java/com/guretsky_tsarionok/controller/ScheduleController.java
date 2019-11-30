@@ -50,5 +50,4 @@ public class ScheduleController {
     public boolean deleteById(@PathVariable long id) {
         return service.deleteById(id);
     }
-
 }
