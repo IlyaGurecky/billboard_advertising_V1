@@ -21,12 +21,12 @@ insert into device_group (id, name, user_id) values (5, 'Billboards', 1);
 insert into device_group (id, name, user_id) values (6, 'Group1', 2);
 
 # ADVERTISING
-insert into advertising (id, name, content_path) values (1, 'Candies', '/Users/ilyaguretsky/IdeaProjects/billboard_advertising_V1/billboard_advertising/abstract_storage/advertising/candies');
-insert into advertising (id, name, content_path) values (2, 'Cola', '/Users/ilyaguretsky/IdeaProjects/billboard_advertising_V1/billboard_advertising/abstract_storage/advertising/cola');
-insert into advertising (id, name, content_path) values (3, 'Courses', '/Users/ilyaguretsky/IdeaProjects/billboard_advertising_V1/billboard_advertising/abstract_storage/advertising/courses');
-insert into advertising (id, name, content_path) values (4, 'Federal company', '/Users/ilyaguretsky/IdeaProjects/billboard_advertising_V1/billboard_advertising/abstract_storage/advertising/federal_company');
-insert into advertising (id, name, content_path) values (5, 'Marigolds', '/Users/ilyaguretsky/IdeaProjects/billboard_advertising_V1/billboard_advertising/abstract_storage/advertising/marigolds');
-insert into advertising (id, name, content_path) values (6, 'Hardware store', '/Users/ilyaguretsky/IdeaProjects/billboard_advertising_V1/billboard_advertising/abstract_storage/advertising/hardware_storage');
+insert into advertising (id, name, content_path, user_id) values (1, 'Candies', '/Users/ilyaguretsky/IdeaProjects/billboard_advertising_V1/billboard_advertising/abstract_storage/advertising/candies', 1);
+insert into advertising (id, name, content_path, user_id) values (2, 'Cola', '/Users/ilyaguretsky/IdeaProjects/billboard_advertising_V1/billboard_advertising/abstract_storage/advertising/cola', 1);
+insert into advertising (id, name, content_path, user_id) values (3, 'Courses', '/Users/ilyaguretsky/IdeaProjects/billboard_advertising_V1/billboard_advertising/abstract_storage/advertising/courses', 2);
+insert into advertising (id, name, content_path, user_id) values (4, 'Federal company', '/Users/ilyaguretsky/IdeaProjects/billboard_advertising_V1/billboard_advertising/abstract_storage/advertising/federal_company', 2);
+insert into advertising (id, name, content_path, user_id) values (5, 'Marigolds', '/Users/ilyaguretsky/IdeaProjects/billboard_advertising_V1/billboard_advertising/abstract_storage/advertising/marigolds', 3);
+insert into advertising (id, name, content_path, user_id) values (6, 'Hardware store', '/Users/ilyaguretsky/IdeaProjects/billboard_advertising_V1/billboard_advertising/abstract_storage/advertising/hardware_storage', 3);
 
 # SCHEDULE
 insert into schedule (id, name, frequency, user_id) values (1, 'Custom_1', 5, 2);
