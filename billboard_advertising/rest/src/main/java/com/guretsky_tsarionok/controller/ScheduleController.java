@@ -1,5 +1,6 @@
 package com.guretsky_tsarionok.controller;
 
+import com.guretsky_tsarionok.dto.ScheduleDto;
 import com.guretsky_tsarionok.model.Schedule;
 import com.guretsky_tsarionok.service.ScheduleService;
 import lombok.AccessLevel;
@@ -34,9 +35,10 @@ public class ScheduleController {
         return service.findById(id).orElse(null);
     }
 
-    @PostMapping
-    public Schedule add(@RequestBody Schedule schedule) {
-        return service.add(schedule);
+    @PostMapping("/user/{userId}")
+    public Schedule add(@RequestBody ScheduleDto schedule,
+                        @PathVariable long userId) {
+        return service.save(schedule, userId);
     }
 
     @PatchMapping

@@ -1,5 +1,6 @@
 package com.guretsky_tsarionok.controller;
 
+import com.guretsky_tsarionok.dto.AdvertisingDto;
 import com.guretsky_tsarionok.model.Advertising;
 import com.guretsky_tsarionok.service.AdvertisingService;
 import lombok.AccessLevel;
@@ -7,7 +8,6 @@ import lombok.RequiredArgsConstructor;
 import lombok.experimental.FieldDefaults;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -34,14 +34,15 @@ public class AdvertisingController {
         return service.findById(id).orElse(null);
     }
 
-    @PostMapping
-    public Advertising add(@RequestBody Advertising advertising) {
-        return service.add(advertising);
+    @GetMapping(value = "/user/{id}")
+    public List<Advertising> getAllByUserId(@PathVariable long id) {
+        return service.getByUserId(id);
     }
 
-    @PatchMapping
-    public Advertising update(@RequestBody Advertising advertising) {
-        return service.update(advertising);
+    @PostMapping("/user/{id}")
+    public Advertising add(@RequestBody AdvertisingDto advertising,
+                           @PathVariable long id) {
+        return service.save(advertising, id);
     }
 
     @DeleteMapping(value = "/{id}")

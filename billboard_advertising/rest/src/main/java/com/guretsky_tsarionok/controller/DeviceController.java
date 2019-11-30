@@ -1,5 +1,6 @@
 package com.guretsky_tsarionok.controller;
 
+import com.guretsky_tsarionok.dto.DeviceDto;
 import com.guretsky_tsarionok.model.Device;
 import com.guretsky_tsarionok.service.DeviceService;
 import lombok.AccessLevel;
@@ -34,18 +35,31 @@ public class DeviceController {
         return service.findById(id).orElse(null);
     }
 
-    @PostMapping
-    public Device add(@RequestBody Device device) {
-        return service.add(device);
+    @GetMapping(value = "/schedule/{scheduleId}/group/{groupId}/user")
+    public List<Device> setScheduleForGroup(@PathVariable long scheduleId,
+                                            @PathVariable long groupId) {
+        return service.setScheduleForGroup(groupId, scheduleId);
     }
 
-    @PatchMapping
-    public Device update(@RequestBody Device device) {
-        return service.update(device);
+    @PostMapping("/user/{id}")
+    public Device add(@RequestBody DeviceDto device,
+                      @PathVariable long id) {
+        return service.save(device, id);
+    }
+
+    @PatchMapping(value = "/{id}")
+    public Device update(@RequestBody DeviceDto device,
+                         @PathVariable Long id) {
+        return service.update(device, id);
     }
 
     @DeleteMapping(value = "/{id}")
     public boolean deleteById(@PathVariable long id) {
         return service.deleteById(id);
+    }
+
+    @GetMapping("/count")
+    public Long count() {
+        return service.count();
     }
 }
