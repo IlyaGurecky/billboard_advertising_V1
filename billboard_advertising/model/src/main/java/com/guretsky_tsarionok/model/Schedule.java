@@ -9,6 +9,8 @@ import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
 import lombok.experimental.FieldDefaults;
+import org.hibernate.annotations.LazyCollection;
+import org.hibernate.annotations.LazyCollectionOption;
 
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -40,6 +42,7 @@ public class Schedule extends EntityBase {
     @OneToMany(mappedBy = "schedule")
     @ToString.Exclude
     @JsonIgnore
+    @LazyCollection(LazyCollectionOption.FALSE)
     List<Device> devices;
 
     @ManyToOne(fetch = FetchType.LAZY)

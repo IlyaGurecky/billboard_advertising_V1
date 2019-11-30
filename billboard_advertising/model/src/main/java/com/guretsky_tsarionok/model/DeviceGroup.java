@@ -9,6 +9,8 @@ import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
 import lombok.experimental.FieldDefaults;
+import org.hibernate.annotations.LazyCollection;
+import org.hibernate.annotations.LazyCollectionOption;
 
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -33,11 +35,12 @@ public class DeviceGroup extends EntityBase {
     @OneToMany(mappedBy = "deviceGroup")
     @JsonIgnore
     @ToString.Exclude
+    @LazyCollection(LazyCollectionOption.TRUE)
     List<Device> devices;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id", referencedColumnName = "id")
+    @JsonIgnore
     User user;
 
 }
-

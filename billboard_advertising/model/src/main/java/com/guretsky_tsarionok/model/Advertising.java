@@ -9,6 +9,8 @@ import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
 import lombok.experimental.FieldDefaults;
+import org.hibernate.annotations.LazyCollection;
+import org.hibernate.annotations.LazyCollectionOption;
 
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -34,20 +36,24 @@ public class Advertising extends EntityBase {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id", referencedColumnName = "id")
+    @JsonIgnore
     User user;
 
-    @ManyToMany(fetch = FetchType.LAZY, mappedBy = "advertisingList")
+    @ManyToMany(mappedBy = "advertisingList")
     @ToString.Exclude
     @JsonIgnore
+    @LazyCollection(LazyCollectionOption.TRUE)
     List<Schedule> schedules;
 
     @OneToMany(mappedBy = "advertising")
     @ToString.Exclude
     @JsonIgnore
+    @LazyCollection(LazyCollectionOption.TRUE)
     List<AdvertisingStatistic> statistics;
 
-    @ManyToMany(fetch = FetchType.LAZY, mappedBy = "advertisingList")
+    @ManyToMany(mappedBy = "advertisingList")
     @ToString.Exclude
     @JsonIgnore
+    @LazyCollection(LazyCollectionOption.TRUE)
     List<Device> devices;
 }

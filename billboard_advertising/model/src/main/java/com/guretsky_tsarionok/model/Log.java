@@ -17,7 +17,7 @@ import javax.persistence.Table;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.PastOrPresent;
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 @Data
 @Builder
@@ -30,7 +30,8 @@ import java.time.LocalDate;
 public class Log extends EntityBase {
     @NotNull
     @PastOrPresent
-    LocalDate time;
+    @JsonIgnore
+    LocalDateTime time;
 
     @NotBlank String content;
 
