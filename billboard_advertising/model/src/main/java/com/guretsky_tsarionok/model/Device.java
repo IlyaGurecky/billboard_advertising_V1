@@ -1,6 +1,7 @@
 package com.guretsky_tsarionok.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -34,10 +35,12 @@ public class Device extends EntityBase {
 
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "schedule_id", referencedColumnName = "id")
+    @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
     Schedule schedule;
 
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "device_group_id", referencedColumnName = "id")
+    @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
     DeviceGroup deviceGroup;
 
     @ManyToOne(fetch = FetchType.LAZY)
