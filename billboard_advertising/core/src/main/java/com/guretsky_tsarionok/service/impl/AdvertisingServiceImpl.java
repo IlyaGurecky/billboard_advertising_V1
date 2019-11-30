@@ -1,7 +1,9 @@
 package com.guretsky_tsarionok.service.impl;
 
+import com.guretsky_tsarionok.dto.AdvertisingDto;
 import com.guretsky_tsarionok.model.Advertising;
 import com.guretsky_tsarionok.repository.AdvertisingRepository;
+import com.guretsky_tsarionok.repository.UserRepository;
 import com.guretsky_tsarionok.service.AdvertisingService;
 import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
@@ -19,6 +21,7 @@ import java.util.Optional;
 public class AdvertisingServiceImpl implements AdvertisingService {
 
     AdvertisingRepository repository;
+    UserRepository userRepository;
 
     @Override
     @Transactional(readOnly = true)
@@ -38,6 +41,16 @@ public class AdvertisingServiceImpl implements AdvertisingService {
     }
 
     @Override
+    public Advertising save(AdvertisingDto dto, Long userId) {
+        Advertising advertising = Advertising.builder()
+                .name(dto.getName())
+                .contentPath(dto.getContentPath())
+                .user(userRepository.findById(userId).orElse(null))
+                .build();
+        return add(advertising);
+    }
+
+    @Override
     public Advertising update(Advertising obj) {
         return repository.save(obj);
     }
@@ -46,5 +59,11 @@ public class AdvertisingServiceImpl implements AdvertisingService {
     public boolean deleteById(long id) {
         repository.deleteById(id);
         return repository.findById(id).isEmpty();
+    }
+
+    @Override
+    @Transactional(readOnly = true)
+    public List<Advertising> getByUserId(long id) {
+        return repository.getByUserId(id);
     }
 }

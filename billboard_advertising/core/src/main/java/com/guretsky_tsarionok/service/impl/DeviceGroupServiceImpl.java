@@ -1,7 +1,9 @@
 package com.guretsky_tsarionok.service.impl;
 
+import com.guretsky_tsarionok.dto.DeviceGroupDto;
 import com.guretsky_tsarionok.model.DeviceGroup;
 import com.guretsky_tsarionok.repository.DeviceGroupRepository;
+import com.guretsky_tsarionok.repository.UserRepository;
 import com.guretsky_tsarionok.service.DeviceGroupService;
 import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
@@ -19,6 +21,7 @@ import java.util.Optional;
 public class DeviceGroupServiceImpl implements DeviceGroupService {
 
     DeviceGroupRepository repository;
+    UserRepository userRepository;
 
     @Override
     @Transactional(readOnly = true)
@@ -30,6 +33,19 @@ public class DeviceGroupServiceImpl implements DeviceGroupService {
     @Transactional(readOnly = true)
     public Optional<DeviceGroup> findById(long id) {
         return repository.findById(id);
+    }
+
+    @Override
+    public DeviceGroup save(DeviceGroupDto dto, Long userId) {
+        return add(DeviceGroup.builder()
+                .name(dto.getName())
+                .user(userRepository.findById(userId).orElse(null))
+                .build());
+    }
+
+    @Override
+    public List<DeviceGroup> getGroupsByUserId(Long id) {
+        return repository.getByUserId(id);
     }
 
     @Override

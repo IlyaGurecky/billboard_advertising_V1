@@ -1,5 +1,6 @@
 package com.guretsky_tsarionok.service.impl;
 
+import com.guretsky_tsarionok.dto.UserDto;
 import com.guretsky_tsarionok.model.Role;
 import com.guretsky_tsarionok.model.User;
 import com.guretsky_tsarionok.repository.UserRepository;
@@ -37,6 +38,14 @@ public class UserServiceImpl implements UserService {
     @Transactional(readOnly = true)
     public List<User> getDeviceOwners() {
         return userRepository.getByRole(Role.DEVICE_OWNER);
+    }
+
+    @Override
+    public User save(UserDto dto) {
+        return add(User.builder()
+                .username(dto.getUsername())
+                .role(Role.DEVICE_OWNER)
+                .build());
     }
 
     @Override
