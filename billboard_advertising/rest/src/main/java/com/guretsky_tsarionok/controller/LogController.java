@@ -1,7 +1,10 @@
 package com.guretsky_tsarionok.controller;
 
+import com.guretsky_tsarionok.converter.UserLogsFileManager;
 import com.guretsky_tsarionok.model.Log;
+import com.guretsky_tsarionok.model.User;
 import com.guretsky_tsarionok.service.LogService;
+import com.guretsky_tsarionok.service.UserService;
 import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
 import lombok.experimental.FieldDefaults;
@@ -14,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.io.IOException;
 import java.util.List;
 
 @RestController
@@ -23,6 +27,8 @@ import java.util.List;
 public class LogController {
 
     LogService service;
+    UserLogsFileManager exporter;
+    UserService userService;
 
     @GetMapping
     public List<Log> getAll() {
@@ -39,6 +45,13 @@ public class LogController {
         return service.add(log);
     }
 
+    @PostMapping(value = "/export/{userId}")
+    public String exportLogs(@PathVariable long userId) throws IOException { //TODO:
+        List<Log> userLogs = service.findByUserId(userId);
+        User user = userService.findById(userId).get(); //TODO:
+        return exporter.exportToFile(userLogs, user.getUsername());
+    }
+
     @PatchMapping
     public Log update(@RequestBody Log log) {
         return service.update(log);
@@ -48,5 +61,4 @@ public class LogController {
     public boolean deleteById(@PathVariable long id) {
         return service.deleteById(id);
     }
-
 }
