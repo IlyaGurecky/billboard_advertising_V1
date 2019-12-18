@@ -17,6 +17,6 @@ spring:
     schemas: billboards_ad
 
 abstract-storage:
-  advertising: abstract_storage/advertising
-  logs: abstract_storage/logs
-  schedule: abstract_storage/schedule
+  advertising: billboard_advertising/abstract_storage/advertising
+  logs: billboard_advertising/abstract_storage/logs
+  schedule: billboard_advertising/abstract_storage/schedule

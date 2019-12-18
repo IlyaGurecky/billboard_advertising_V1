@@ -43,3 +43,7 @@ insert into device (id, name, device_group_id, user_id, schedule_id) values (3, 
 insert into device (id, name, device_group_id, user_id, schedule_id) values (4, 'Billboard2', null, 2, null);
 insert into device (id, name, device_group_id, user_id, schedule_id) values (5, 'Billboard3', null, 3, null);
 insert into device (id, name, device_group_id, user_id, schedule_id) values (6, 'Panasonic', null, 3, null);
+
+# LOG
+insert into log (id, content, user_id) values (1, 'User1 add schedule1', 1);
+insert into log (id, content, user_id) values (2, 'User1 add schedule2', 1);

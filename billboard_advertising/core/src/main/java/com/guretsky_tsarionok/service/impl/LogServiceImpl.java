@@ -9,7 +9,6 @@ import lombok.experimental.FieldDefaults;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.time.LocalDateTime;
 import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
@@ -36,7 +35,6 @@ public class LogServiceImpl implements LogService {
 
     @Override
     public Log add(Log obj) {
-        obj.setTime(LocalDateTime.now());
         return repository.save(obj);
     }
 

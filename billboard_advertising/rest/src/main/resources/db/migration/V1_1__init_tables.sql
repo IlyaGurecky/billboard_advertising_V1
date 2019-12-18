@@ -9,7 +9,6 @@ CREATE TABLE IF NOT EXISTS `users`
 CREATE TABLE IF NOT EXISTS `log`
 (
     `id`      INT      NOT NULL AUTO_INCREMENT,
-    `time`    DATETIME NOT NULL,
     `content` VARCHAR(255),
     `user_id` INT,
     FOREIGN KEY (`user_id`) REFERENCES users (`id`) ON DELETE CASCADE,

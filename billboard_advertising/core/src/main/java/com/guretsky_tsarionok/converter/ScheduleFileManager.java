@@ -20,7 +20,6 @@ import java.util.stream.Collectors;
 public class ScheduleFileManager {
 
     private static final String FILE_PATH_TEMPLATE = "%s/%s/%s.txt";
-    private static final String ADVERTISING_INFO_TEMPLATE = "%s  :  %s";
     private static final Charset utf8 = StandardCharsets.UTF_8;
 
     @Value("${abstract-storage.schedule}")
@@ -50,9 +49,7 @@ public class ScheduleFileManager {
                         Integer.toString(frequency));
         content.addAll(
                 advertisingList.stream()
-                        .map(advertising -> String.format(ADVERTISING_INFO_TEMPLATE,
-                                advertising.getName(),
-                                advertising.getContentPath()))
+                        .map(Advertising::getName)
                         .collect(Collectors.toList())
         );
         return content;

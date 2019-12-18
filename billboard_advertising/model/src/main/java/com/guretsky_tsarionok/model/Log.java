@@ -15,9 +15,6 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.PastOrPresent;
-import java.time.LocalDateTime;
 
 @Data
 @Builder
@@ -28,11 +25,6 @@ import java.time.LocalDateTime;
 @FieldDefaults(level = AccessLevel.PRIVATE)
 @Table(name = "log")
 public class Log extends EntityBase {
-    @NotNull
-    @PastOrPresent
-    @JsonIgnore
-    LocalDateTime time;
-
     @NotBlank String content;
 
     @ManyToOne(fetch = FetchType.LAZY)
