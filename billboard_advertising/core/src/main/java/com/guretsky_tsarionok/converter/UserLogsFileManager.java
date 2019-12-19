@@ -18,7 +18,6 @@ import java.util.stream.Collectors;
 public class UserLogsFileManager {
 
     private static final String FILE_PATH_TEMPLATE = "%s/%s/%sLogs.txt";
-    public static final String FILE_DIRECTORY_TEMPLATE = "%s/%s";
     private static final Charset utf8 = StandardCharsets.UTF_8;
 
     @Value("${abstract-storage.logs}")
