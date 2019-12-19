@@ -47,3 +47,9 @@ insert into device (id, name, device_group_id, user_id, schedule_id) values (6, 
 # LOG
 insert into log (id, content, user_id) values (1, 'User1 add schedule1', 1);
 insert into log (id, content, user_id) values (2, 'User1 add schedule2', 1);
+
+# SCHEDULE_AD
+insert into schedule_ad(id, schedule_id, advertising_id) values (1, 1, 4);
+insert into schedule_ad(id, schedule_id, advertising_id) values (2, 1, 3);
+insert into schedule_ad(id, schedule_id, advertising_id) values (3, 5, 1);
+insert into schedule_ad(id, schedule_id, advertising_id) values (4, 5, 2);

@@ -54,6 +54,7 @@ CREATE TABLE IF NOT EXISTS `advertising`
     `name`         VARCHAR(255) NOT NULL,
     `content_path` VARCHAR(255) NOT NULL,
     `user_id`      INT,
+    UNIQUE (`name`, `user_id`),
     FOREIGN KEY (`user_id`) REFERENCES users (`id`) ON DELETE CASCADE,
     PRIMARY KEY (`id`)
 );

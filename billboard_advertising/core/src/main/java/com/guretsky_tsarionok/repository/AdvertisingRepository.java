@@ -7,4 +7,5 @@ import java.util.List;
 
 public interface AdvertisingRepository extends JpaRepository<Advertising, Long> {
     List<Advertising> getByUserId(long id);
+    Advertising findByNameAndUserId(String name, long userId);
 }

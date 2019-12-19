@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.io.IOException;
 import java.util.List;
 
 @RestController
@@ -39,6 +40,17 @@ public class ScheduleController {
     public Schedule add(@RequestBody ScheduleDto schedule,
                         @PathVariable long userId) {
         return service.save(schedule, userId);
+    }
+
+    @PostMapping("/export/{scheduleId}")
+    public String export(@PathVariable long scheduleId) throws IOException {
+        return service.export(scheduleId);
+    }
+
+    @PostMapping("/import/{username}")
+    public boolean importSchedule(@PathVariable String username,
+                                  @RequestBody String filePath) {
+        return service.importSchedule(filePath, username);
     }
 
     @PatchMapping
