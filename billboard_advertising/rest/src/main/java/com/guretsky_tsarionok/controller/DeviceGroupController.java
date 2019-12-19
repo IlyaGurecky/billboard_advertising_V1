@@ -29,6 +29,11 @@ public class DeviceGroupController {
         return service.getAll();
     }
 
+    @GetMapping(value = "/user/{userId}")
+    public List<DeviceGroup> getByUserId(@PathVariable long userId) {
+        return service.getGroupsByUserId(userId);
+    }
+
     @GetMapping(value = "/{id}")
     public DeviceGroup getById(@PathVariable long id) {
         return service.findById(id).orElse(null);
@@ -44,5 +49,4 @@ public class DeviceGroupController {
     public boolean deleteById(@PathVariable long id) {
         return service.deleteById(id);
     }
-
 }

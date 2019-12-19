@@ -53,4 +53,9 @@ public class UserController {
     public boolean deleteById(@PathVariable long id) {
         return service.deleteById(id);
     }
+
+    @GetMapping(value = "/count")
+    public long count() {
+        return service.count();
+    }
 }

@@ -11,4 +11,8 @@ public interface DeviceService extends CrudService<Device> {
     long count();
     List<Device> getByGroupAndUserId(String name, long userId);
     List<Device> setScheduleForGroup(long groupId, long scheduleId);
+    Device setScheduleForDevice(long scheduleId, long deviceId);
+    List<Device> getByUserId(long userId);
+    List<Device> setGroup(long groupId, Long[] deviceIds);
+    boolean deleteDeviceFromGroup(long deviceId, long groupId);
 }

@@ -34,6 +34,11 @@ public class AdvertisingStatisticController {
         return service.findById(id).orElse(null);
     }
 
+    @GetMapping(value = "/ad/{adId}")
+    public List<AdvertisingStatistic> getAllByAdId(@PathVariable long adId) {
+        return service.getAllByAdId(adId);
+    }
+
     @PostMapping
     public AdvertisingStatistic add(@RequestBody AdvertisingStatistic statistic) {
         return service.add(statistic);

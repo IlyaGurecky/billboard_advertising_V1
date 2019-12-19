@@ -49,5 +49,4 @@ public class AdvertisingController {
     public boolean deleteById(@PathVariable long id) {
         return service.deleteById(id);
     }
-
 }

@@ -33,6 +33,12 @@ public class AdStatisticServiceImpl implements AdStatisticService {
     }
 
     @Override
+    @Transactional(readOnly = true)
+    public List<AdvertisingStatistic> getAllByAdId(long adId) {
+        return repository.getByAdvertisingId(adId);
+    }
+
+    @Override
     public AdvertisingStatistic add(AdvertisingStatistic obj) {
         return repository.save(obj);
     }

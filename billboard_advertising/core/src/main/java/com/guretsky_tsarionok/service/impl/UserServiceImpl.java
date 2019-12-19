@@ -49,6 +49,11 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    public long count() {
+        return userRepository.count();
+    }
+
+    @Override
     public User add(User obj) {
         if (userRepository.findByUsername(obj.getUsername()).isPresent()) {
             return null;

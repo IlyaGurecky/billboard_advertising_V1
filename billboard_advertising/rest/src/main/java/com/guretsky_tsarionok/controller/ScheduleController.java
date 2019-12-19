@@ -36,6 +36,11 @@ public class ScheduleController {
         return service.findById(id).orElse(null);
     }
 
+    @GetMapping(value = "/user/{userId}")
+    public List<Schedule> getByUserId(@PathVariable long userId) {
+        return service.findByUserId(userId);
+    }
+
     @PostMapping("/user/{userId}")
     public Schedule add(@RequestBody ScheduleDto schedule,
                         @PathVariable long userId) {

@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
@@ -35,10 +36,33 @@ public class DeviceController {
         return service.findById(id).orElse(null);
     }
 
+    @GetMapping(value = "/group/{groupName}/user/{userId}")
+    public List<Device> getByGroup(@PathVariable String groupName,
+                                   @PathVariable long userId) {
+        return service.getByGroupAndUserId(groupName, userId);
+    }
+
+    @GetMapping(value = "/user/{userId}")
+    public List<Device> getByUserId(@PathVariable long userId) {
+        return service.getByUserId(userId);
+    }
+
+    @PatchMapping(value = "/group/{groupId}")
+    public List<Device> setGroupForDevices(@PathVariable long groupId,
+                                           @RequestParam Long[] deviceIds) {
+        return service.setGroup(groupId, deviceIds);
+    }
+
     @PatchMapping(value = "/schedule/{scheduleId}/group/{groupId}/user")
     public List<Device> setScheduleForGroup(@PathVariable long scheduleId,
                                             @PathVariable long groupId) {
         return service.setScheduleForGroup(groupId, scheduleId);
+    }
+
+    @PatchMapping(value = "/schedule/{scheduleId}/device/{deviceId}")
+    public Device setScheduleForDevice(@PathVariable long scheduleId,
+                                       @PathVariable long deviceId) {
+        return service.setScheduleForDevice(scheduleId, deviceId);
     }
 
     @PostMapping("/user/{id}")
@@ -61,5 +85,11 @@ public class DeviceController {
     @GetMapping("/count")
     public Long count() {
         return service.count();
+    }
+
+    @DeleteMapping("/delete/device/{deviceId}/group/{groupId}")
+    public boolean deleteDeviceFromGroup(@PathVariable long deviceId,
+                                         @PathVariable long groupId) {
+        return service.deleteDeviceFromGroup(deviceId, groupId);
     }
 }

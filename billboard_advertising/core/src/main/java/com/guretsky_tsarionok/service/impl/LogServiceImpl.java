@@ -51,8 +51,7 @@ public class LogServiceImpl implements LogService {
 
     @Override
     public boolean deleteById(long id) {
-        repository.deleteById(id);
-        return repository.findById(id).isEmpty();
+        return false;
     }
 
     @Override

@@ -10,4 +10,5 @@ public interface UserService extends CrudService<User> {
     Optional<User> findByUsername(String username);
     List<User> getDeviceOwners();
     User save(UserDto dto);
+    long count();
 }

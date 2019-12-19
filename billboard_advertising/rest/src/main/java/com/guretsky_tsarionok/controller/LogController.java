@@ -5,7 +5,6 @@ import com.guretsky_tsarionok.service.LogService;
 import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
 import lombok.experimental.FieldDefaults;
-import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -48,10 +47,5 @@ public class LogController {
     @PatchMapping
     public Log update(@RequestBody Log log) {
         return service.update(log);
-    }
-
-    @DeleteMapping(value = "/{id}")
-    public boolean deleteById(@PathVariable long id) {
-        return service.deleteById(id);
     }
 }

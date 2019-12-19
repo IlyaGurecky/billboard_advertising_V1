@@ -16,6 +16,7 @@ import lombok.experimental.FieldDefaults;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
@@ -51,6 +52,12 @@ public class DeviceServiceImpl implements DeviceService {
     @Transactional(readOnly = true)
     public List<Device> getByGroupAndUserId(String name, long userId) {
         return repository.getByDeviceGroupNameAndUserId(name, userId);
+    }
+
+    @Override
+    @Transactional(readOnly = true)
+    public List<Device> getByUserId(long userId) {
+        return repository.findByUserId(userId);
     }
 
     @Override
@@ -120,5 +127,38 @@ public class DeviceServiceImpl implements DeviceService {
     @Override
     public long count() {
         return repository.count();
+    }
+
+    @Override
+    public Device setScheduleForDevice(long scheduleId, long deviceId) {
+        Device device = repository.findById(deviceId).get();
+        device.setSchedule(scheduleRepository.findById(scheduleId).get());
+        return repository.save(device);
+    }
+
+    @Override
+    public List<Device> setGroup(long groupId, Long[] deviceIds) {
+        DeviceGroup deviceGroup = deviceGroupRepository.getOne(groupId);
+        List<Device> devices = Arrays.stream(deviceIds)
+                .map(id -> repository.findById(id).get())
+                .collect(Collectors.toList());
+        return devices.stream()
+                .peek(device -> device.setDeviceGroup(deviceGroup))
+                .collect(Collectors.toList());
+    }
+
+    @Override
+    public boolean deleteDeviceFromGroup(long deviceId, long groupId) {
+        Device device = repository.getOne(deviceId);
+        DeviceGroup group = deviceGroupRepository.getOne(groupId);
+        if (nonNull(device) && nonNull(group)) {
+            if (device.getDeviceGroup().getName().equals(group.getName())) {
+                device.setDeviceGroup(null);
+                repository.save(device);
+                return true;
+            }
+            return false;
+        }
+        return false;
     }
 }

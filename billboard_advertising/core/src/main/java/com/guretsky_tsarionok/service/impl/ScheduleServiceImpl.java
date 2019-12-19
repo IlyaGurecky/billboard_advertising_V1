@@ -46,6 +46,12 @@ public class ScheduleServiceImpl implements ScheduleService {
     }
 
     @Override
+    @Transactional(readOnly = true)
+    public List<Schedule> findByUserId(long userId) {
+        return repository.findByUserId(userId);
+    }
+
+    @Override
     public Schedule add(Schedule obj) {
         return repository.save(obj);
     }
