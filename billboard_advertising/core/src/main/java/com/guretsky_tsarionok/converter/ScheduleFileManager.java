@@ -22,7 +22,6 @@ public class ScheduleFileManager {
 
     private static final String FILE_PATH_TEMPLATE = "%s/%s/%s.txt";
     private static final String SCHEDULE_AD_INFO_TEMPLATE = "%s:%s";
-    private static final String AD_INFO_DELIMITER = "\\:";
     private static final Charset utf8 = StandardCharsets.UTF_8;
 
     @Value("${abstract-storage.schedule}")
