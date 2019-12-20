@@ -31,7 +31,7 @@ CREATE TABLE IF NOT EXISTS `schedule`
     `name`      VARCHAR(255) NOT NULL,
     `frequency` INT          NOT NULL,
     `user_id`   INT          NOT NULL,
-    FOREIGN KEY (`user_id`) REFERENCES users (`id`),
+    FOREIGN KEY (`user_id`) REFERENCES users (`id`) ON DELETE CASCADE,
     PRIMARY KEY (`id`)
 );
 
@@ -43,7 +43,7 @@ CREATE TABLE IF NOT EXISTS `device`
     `user_id`         INT          NOT NULL,
     `schedule_id`     INT,
     FOREIGN KEY (`device_group_id`) REFERENCES device_group (`id`),
-    FOREIGN KEY (`user_id`) REFERENCES users (`id`),
+    FOREIGN KEY (`user_id`) REFERENCES users (`id`) ON DELETE CASCADE,
     FOREIGN KEY (`schedule_id`) REFERENCES schedule (`id`),
     PRIMARY KEY (`id`)
 );
