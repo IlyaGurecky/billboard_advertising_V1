@@ -1,6 +1,7 @@
 package com.guretsky_tsarionok.service.impl;
 
 import com.guretsky_tsarionok.dto.AdvertisingDto;
+import com.guretsky_tsarionok.logger.LoggingHelper;
 import com.guretsky_tsarionok.model.Advertising;
 import com.guretsky_tsarionok.repository.AdvertisingRepository;
 import com.guretsky_tsarionok.repository.UserRepository;
@@ -22,6 +23,7 @@ public class AdvertisingServiceImpl implements AdvertisingService {
 
     AdvertisingRepository repository;
     UserRepository userRepository;
+    LoggingHelper logger;
 
     @Override
     @Transactional(readOnly = true)
@@ -47,6 +49,7 @@ public class AdvertisingServiceImpl implements AdvertisingService {
                 .contentPath(dto.getContentPath())
                 .user(userRepository.findById(userId).orElse(null))
                 .build();
+        logger.log("add advertising %s", userId, advertising.getName());
         return add(advertising);
     }
 
@@ -57,6 +60,9 @@ public class AdvertisingServiceImpl implements AdvertisingService {
 
     @Override
     public boolean deleteById(long id) {
+        Advertising advertising = repository.getOne(id);
+        long userId = advertising.getUser().getId();
+        logger.log("delete advertising %s", userId, advertising.getName());
         repository.deleteById(id);
         return repository.findById(id).isEmpty();
     }

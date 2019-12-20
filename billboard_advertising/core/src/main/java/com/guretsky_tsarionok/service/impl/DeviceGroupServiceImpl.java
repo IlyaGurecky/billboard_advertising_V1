@@ -1,6 +1,7 @@
 package com.guretsky_tsarionok.service.impl;
 
 import com.guretsky_tsarionok.dto.DeviceGroupDto;
+import com.guretsky_tsarionok.logger.LoggingHelper;
 import com.guretsky_tsarionok.model.DeviceGroup;
 import com.guretsky_tsarionok.repository.DeviceGroupRepository;
 import com.guretsky_tsarionok.repository.UserRepository;
@@ -22,6 +23,7 @@ public class DeviceGroupServiceImpl implements DeviceGroupService {
 
     DeviceGroupRepository repository;
     UserRepository userRepository;
+    LoggingHelper logger;
 
     @Override
     @Transactional(readOnly = true)
@@ -37,10 +39,12 @@ public class DeviceGroupServiceImpl implements DeviceGroupService {
 
     @Override
     public DeviceGroup save(DeviceGroupDto dto, Long userId) {
-        return add(DeviceGroup.builder()
+        DeviceGroup deviceGroup = add(DeviceGroup.builder()
                 .name(dto.getName())
                 .user(userRepository.findById(userId).orElse(null))
                 .build());
+        logger.log("add device group %s", userId, deviceGroup.getName());
+        return deviceGroup;
     }
 
     @Override
@@ -60,7 +64,9 @@ public class DeviceGroupServiceImpl implements DeviceGroupService {
 
     @Override
     public boolean deleteById(long id) {
+        DeviceGroup deviceGroup = repository.getOne(id);
         repository.deleteById(id);
+        logger.log("delete device group %s", deviceGroup.getUser().getId(), deviceGroup.getName());
         return repository.findById(id).isEmpty();
     }
 }

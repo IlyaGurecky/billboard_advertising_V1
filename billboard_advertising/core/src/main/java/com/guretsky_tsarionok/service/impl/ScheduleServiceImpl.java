@@ -2,6 +2,7 @@ package com.guretsky_tsarionok.service.impl;
 
 import com.guretsky_tsarionok.converter.ScheduleFileManager;
 import com.guretsky_tsarionok.dto.ScheduleDto;
+import com.guretsky_tsarionok.logger.LoggingHelper;
 import com.guretsky_tsarionok.model.Advertising;
 import com.guretsky_tsarionok.model.Schedule;
 import com.guretsky_tsarionok.model.User;
@@ -13,6 +14,7 @@ import com.guretsky_tsarionok.validator.ImportedScheduleValidator;
 import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
 import lombok.experimental.FieldDefaults;
+import org.apache.logging.log4j.util.Strings;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -32,6 +34,7 @@ public class ScheduleServiceImpl implements ScheduleService {
     AdvertisingRepository advertisingRepository;
     UserRepository userRepository;
     ScheduleFileManager fileManager;
+    LoggingHelper logger;
 
     @Override
     @Transactional(readOnly = true)
@@ -63,30 +66,38 @@ public class ScheduleServiceImpl implements ScheduleService {
                 .map(aLong -> advertisingRepository.findById(aLong).orElse(null))
                 .filter(Objects::nonNull)
                 .collect(Collectors.toList());
-        return add(Schedule.builder()
+        Schedule schedule = add(Schedule.builder()
                 .name(dto.getName())
                 .frequency(dto.getFrequency())
                 .advertisingList(advertisingList)
                 .user(userRepository.findById(userId).orElse(null))
                 .build());
+        logger.log("add schedule %s", userId, schedule.getName());
+        return schedule;
     }
 
     @Override
     public String export(Long scheduleId) throws IOException {
-        return fileManager.exportSchedule(repository.findById(scheduleId).get());
+        Schedule schedule = repository.getOne(scheduleId);
+        String path = fileManager.exportSchedule(schedule);
+        if (!Strings.isBlank(path)) {
+            logger.log("export schedule %s", schedule.getUser().getId(), schedule.getName());
+        }
+        return path;
     }
 
     @Override
     public boolean importSchedule(String filePath, String username) {
         Schedule schedule = fileManager.importSchedule(filePath, username);
         if (ImportedScheduleValidator.validateSchedule(schedule, repository, userRepository, advertisingRepository)) {
-            User user = userRepository.findByUsername(username).get();
+            User user = userRepository.findByUsername(username).orElse(null);
             List<Advertising> advertising = schedule.getAdvertisingList().stream()
                     .map(ad -> advertisingRepository.findByNameAndUserId(ad.getName(), user.getId()))
                     .collect(Collectors.toList());
             schedule.setAdvertisingList(advertising);
             schedule.setUser(user);
-            repository.save(schedule);
+            Schedule savedSchedule = repository.save(schedule);
+            logger.log("import schedule %s", savedSchedule.getUser().getId(), savedSchedule.getName());
             return true;
         }
         return false;
@@ -99,7 +110,12 @@ public class ScheduleServiceImpl implements ScheduleService {
 
     @Override
     public boolean deleteById(long id) {
+        Schedule schedule = repository.getOne(id);
         repository.deleteById(id);
-        return repository.findById(id).isEmpty();
+        if (repository.findById(id).isEmpty()) {
+            logger.log("delete schedule %s", schedule.getUser().getId(), schedule.getName());
+            return true;
+        }
+        return false;
     }
 }

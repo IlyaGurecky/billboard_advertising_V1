@@ -5,9 +5,7 @@ import com.guretsky_tsarionok.service.AdStatisticService;
 import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
 import lombok.experimental.FieldDefaults;
-import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -42,15 +40,5 @@ public class AdvertisingStatisticController {
     @PostMapping
     public AdvertisingStatistic add(@RequestBody AdvertisingStatistic statistic) {
         return service.add(statistic);
-    }
-
-    @PatchMapping
-    public AdvertisingStatistic update(@RequestBody AdvertisingStatistic statistic) {
-        return service.update(statistic);
-    }
-
-    @DeleteMapping(value = "/{id}")
-    public boolean deleteById(@PathVariable long id) {
-        return service.deleteById(id);
     }
 }
