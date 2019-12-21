@@ -19,7 +19,6 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Arrays;
 import java.util.List;
-import java.util.Objects;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
@@ -75,32 +74,6 @@ public class DeviceServiceImpl implements DeviceService {
     @Override
     public Device add(Device obj) {
         return repository.save(obj);
-    }
-
-    @Override
-    public Device update(DeviceDto dto, Long id) {
-        Optional<Device> deviceOpt = repository.findById(id);
-        if (deviceOpt.isPresent()) {
-            Device device = deviceOpt.get();
-            if (nonNull(dto.getName())) {
-                device.setName(dto.getName());
-            }
-            if (nonNull(dto.getScheduleId())) {
-                device.setSchedule(scheduleRepository.getOne(dto.getScheduleId()));
-            }
-            if (nonNull(dto.getDeviceGroupId())) {
-                device.setDeviceGroup(deviceGroupRepository.getOne(dto.getDeviceGroupId()));
-            }
-            if (nonNull(dto.getAdvIds()) && !dto.getAdvIds().isEmpty()) {
-                device.setAdvertisingList(
-                        dto.getAdvIds().stream()
-                                .map(aLong -> adRepository.findById(aLong).orElse(null))
-                                .filter(Objects::nonNull)
-                                .collect(Collectors.toList()));
-            }
-            return add(device);
-        }
-        return null;
     }
 
     @Override
