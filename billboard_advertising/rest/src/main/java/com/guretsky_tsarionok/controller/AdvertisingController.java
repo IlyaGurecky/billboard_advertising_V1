@@ -2,6 +2,7 @@ package com.guretsky_tsarionok.controller;
 
 import com.guretsky_tsarionok.dto.AdvertisingDto;
 import com.guretsky_tsarionok.model.Advertising;
+import com.guretsky_tsarionok.server.Server;
 import com.guretsky_tsarionok.service.AdvertisingService;
 import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
@@ -23,6 +24,7 @@ import java.util.List;
 public class AdvertisingController {
 
     AdvertisingService service;
+    Server server;
 
     @GetMapping
     public List<Advertising> getAll() {
@@ -47,6 +49,7 @@ public class AdvertisingController {
 
     @DeleteMapping(value = "/{id}")
     public boolean deleteById(@PathVariable long id) {
+        server.deleteAd(id);
         return service.deleteById(id);
     }
 }

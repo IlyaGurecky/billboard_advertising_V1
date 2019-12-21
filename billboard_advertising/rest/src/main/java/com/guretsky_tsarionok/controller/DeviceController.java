@@ -2,6 +2,7 @@ package com.guretsky_tsarionok.controller;
 
 import com.guretsky_tsarionok.dto.DeviceDto;
 import com.guretsky_tsarionok.model.Device;
+import com.guretsky_tsarionok.server.Server;
 import com.guretsky_tsarionok.service.DeviceService;
 import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
@@ -25,6 +26,7 @@ import java.util.List;
 public class DeviceController {
 
     DeviceService service;
+    Server server;
 
     @GetMapping
     public List<Device> getAll() {
@@ -47,6 +49,11 @@ public class DeviceController {
         return service.getByUserId(userId);
     }
 
+    @GetMapping(value = "/advertising/{deviceId}")
+    public String getNextVideo(@PathVariable long deviceId) {
+        return server.getNextAd(deviceId);
+    }
+
     @PatchMapping(value = "/group/{groupId}")
     public List<Device> setGroupForDevices(@PathVariable long groupId,
                                            @RequestParam Long[] deviceIds) {
@@ -56,12 +63,14 @@ public class DeviceController {
     @PatchMapping(value = "/schedule/{scheduleId}/group/{groupId}/user")
     public List<Device> setScheduleForGroup(@PathVariable long scheduleId,
                                             @PathVariable long groupId) {
+        server.setScheduleForGroup(groupId, scheduleId);
         return service.setScheduleForGroup(groupId, scheduleId);
     }
 
     @PatchMapping(value = "/schedule/{scheduleId}/device/{deviceId}")
     public Device setScheduleForDevice(@PathVariable long scheduleId,
                                        @PathVariable long deviceId) {
+        server.setScheduleForDevice(deviceId, scheduleId);
         return service.setScheduleForDevice(scheduleId, deviceId);
     }
 
