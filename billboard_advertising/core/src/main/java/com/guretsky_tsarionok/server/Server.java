@@ -3,7 +3,6 @@ package com.guretsky_tsarionok.server;
 import com.guretsky_tsarionok.model.Advertising;
 import com.guretsky_tsarionok.model.Device;
 import com.guretsky_tsarionok.model.Schedule;
-import com.guretsky_tsarionok.service.AdStatisticService;
 import com.guretsky_tsarionok.service.AdvertisingService;
 import com.guretsky_tsarionok.service.DeviceService;
 import com.guretsky_tsarionok.service.ScheduleService;
@@ -31,7 +30,6 @@ import static java.util.Objects.nonNull;
 public class Server {
 
     DeviceService deviceService;
-    AdStatisticService adStatisticService;
     AdvertisingService advertisingService;
     ScheduleService scheduleService;
     @NonFinal
