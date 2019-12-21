@@ -58,9 +58,6 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public User add(User obj) {
-        if (userRepository.findByUsername(obj.getUsername()).isPresent()) {
-            return null;
-        }
         return userRepository.save(obj);
     }
 
