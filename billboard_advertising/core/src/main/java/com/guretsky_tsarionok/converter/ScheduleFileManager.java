@@ -65,7 +65,7 @@ public class ScheduleFileManager {
             info = Files.lines(Paths.get(filePath), StandardCharsets.UTF_8)
                     .collect(Collectors.toList());
         } catch (IOException e) {
-            System.err.println(e);
+            System.err.println(e.getLocalizedMessage());
             return null;
         }
 
