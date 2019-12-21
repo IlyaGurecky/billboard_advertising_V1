@@ -42,10 +42,13 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public User save(UserDto dto) {
-        return add(User.builder()
-                .username(dto.getUsername())
-                .role(Role.DEVICE_OWNER)
-                .build());
+        if (userRepository.findByUsername(dto.getUsername()).isEmpty()) {
+            return add(User.builder()
+                    .username(dto.getUsername())
+                    .role(Role.DEVICE_OWNER)
+                    .build());
+        }
+        return null;
     }
 
     @Override

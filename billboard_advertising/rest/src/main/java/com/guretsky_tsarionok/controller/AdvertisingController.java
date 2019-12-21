@@ -1,7 +1,6 @@
 package com.guretsky_tsarionok.controller;
 
 import com.guretsky_tsarionok.dto.AdvertisingDto;
-import com.guretsky_tsarionok.logger.LoggingHelper;
 import com.guretsky_tsarionok.model.Advertising;
 import com.guretsky_tsarionok.service.AdvertisingService;
 import lombok.AccessLevel;
@@ -24,7 +23,6 @@ import java.util.List;
 public class AdvertisingController {
 
     AdvertisingService service;
-    LoggingHelper logger;
 
     @GetMapping
     public List<Advertising> getAll() {

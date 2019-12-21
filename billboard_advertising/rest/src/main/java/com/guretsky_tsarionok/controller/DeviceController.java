@@ -71,10 +71,9 @@ public class DeviceController {
         return service.save(device, id);
     }
 
-    @PatchMapping(value = "/{id}")
-    public Device update(@RequestBody DeviceDto device,
-                         @PathVariable Long id) {
-        return service.update(device, id);
+    @PatchMapping
+    public Device update(@RequestBody Device device) {
+        return service.update(device);
     }
 
     @DeleteMapping(value = "/{id}")

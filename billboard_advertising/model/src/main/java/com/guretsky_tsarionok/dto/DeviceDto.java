@@ -7,8 +7,6 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.experimental.FieldDefaults;
 
-import java.util.List;
-
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
@@ -16,7 +14,4 @@ import java.util.List;
 @FieldDefaults(level = AccessLevel.PRIVATE)
 public class DeviceDto {
     String name;
-    Long scheduleId;
-    Long deviceGroupId;
-    List<Long> advIds;
 }
