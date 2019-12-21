@@ -50,10 +50,4 @@ public class Advertising extends EntityBase {
     @JsonIgnore
     @LazyCollection(LazyCollectionOption.TRUE)
     List<AdvertisingStatistic> statistics;
-
-    @ManyToMany(mappedBy = "advertisingList")
-    @ToString.Exclude
-    @JsonIgnore
-    @LazyCollection(LazyCollectionOption.TRUE)
-    List<Device> devices;
 }

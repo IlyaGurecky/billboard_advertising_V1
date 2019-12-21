@@ -69,16 +69,6 @@ CREATE TABLE IF NOT EXISTS `advertising_statistic`
     PRIMARY KEY (`id`)
 );
 
-CREATE TABLE IF NOT EXISTS `device_ad`
-(
-    `id`             INT NOT NULL AUTO_INCREMENT,
-    `device_id`      INT NOT NULL,
-    `advertising_id` INT NOT NULL,
-    FOREIGN KEY (`device_id`) REFERENCES device (`id`) ON DELETE CASCADE,
-    FOREIGN KEY (`advertising_id`) REFERENCES advertising (`id`) ON DELETE CASCADE,
-    PRIMARY KEY (`id`)
-);
-
 CREATE TABLE IF NOT EXISTS `schedule_ad`
 (
     `id`             INT NOT NULL AUTO_INCREMENT,
